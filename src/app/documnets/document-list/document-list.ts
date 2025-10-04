@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DocumentItem} from '../document-item/document-item';
+import { DocumentItem } from '../document-item/document-item';
 
 @Component({
   selector: 'cms-document-list',
@@ -8,5 +8,4 @@ import {DocumentItem} from '../document-item/document-item';
   styleUrl: './document-list.css'
 })
 export class DocumentList {
-
 }
