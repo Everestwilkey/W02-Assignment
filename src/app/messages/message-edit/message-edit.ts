@@ -1,19 +1,22 @@
-import {Component, ElementRef, EventEmitter, Output, viewChild, ViewChild} from '@angular/core';
-import {Message} from '../message.model';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-edit',
+  standalone: true,
   imports: [],
   templateUrl: './message-edit.html',
   styleUrl: './message-edit.css'
 })
 export class MessageEdit {
   @ViewChild("subject") subjectRef!: ElementRef;
-  @ViewChild("msgText") msgTextRef!: ElementRef;  // Fix: uppercase V
-  @Output() addMessageEvent = new EventEmitter<Message>();
-  currentSender: string = "Everest Wilkey";
+  @ViewChild("msgText") msgTextRef!: ElementRef;
+  currentSender: string = "1";  // Contact ID - will be looked up in ContactService
 
-  onMessagesend(){
+  constructor(private messageService: MessageService) {}
+
+  onMessagesend() {
     const subject = this.subjectRef.nativeElement.value;
     const msgText = this.msgTextRef.nativeElement.value;
 
@@ -21,12 +24,14 @@ export class MessageEdit {
       Date.now().toString(),
       subject,
       msgText,
-      this.currentSender,
-    )
-    this.addMessageEvent.emit(newMessage);
+      this.currentSender
+    );
+
+    this.messageService.addMessage(newMessage);
     this.onClear();
   }
-  onClear(){
+
+  onClear() {
     this.subjectRef.nativeElement.value = "";
     this.msgTextRef.nativeElement.value = "";
   }
