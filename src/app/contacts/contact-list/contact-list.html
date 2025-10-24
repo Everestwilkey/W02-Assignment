@@ -6,7 +6,7 @@
           <h3 class="panel-title">Contacts</h3>
         </div>
         <div class="pull-right">
-          <button class="btn btn-success btn-sm">New Contact</button>
+          <a class="btn btn-success btn-sm" [routerLink]="['new']">New Contact</a>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -19,8 +19,7 @@
         <div class="list-group">
           <cms-contact-item
             *ngFor="let contact of contacts"
-            [contact]="contact"
-            (click)="onSelected(contact)">
+            [contact]="contact">
           </cms-contact-item>
         </div>
       </div>
